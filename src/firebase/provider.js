@@ -10,12 +10,10 @@ export const singInWithGoogle = async () => {
     const { displayName, email, photoURL, uid } = result.user;
     return {
       ok: true,
-      userInfo: {
-        displayName,
-        email,
-        photoURL,
-        uid,
-      },
+      displayName,
+      email,
+      photoURL,
+      uid,
     };
   } catch (error) {
     const errorCode = error.code;
@@ -23,7 +21,7 @@ export const singInWithGoogle = async () => {
     return {
       ok: false,
       errorCode,
-      errorMessage,
+      errorMsg: errorMessage,
     };
   }
 };
