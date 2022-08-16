@@ -30,7 +30,8 @@ export const RegisterPage = () => {
     displayNameValid,
     emailValid,
     passwordValid,
-  } = useForm(formData, formValidations);
+  } = useForm(formData, formValidation);
+  console.log(displayNameValid);
   const onSubmit = (event) => {};
   return (
     <AuthLayout title="Crear Cuenta">
