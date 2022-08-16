@@ -9,6 +9,7 @@ export const checkingAuthenticaction = (email, password) => {
     dispatch(checkingCredentials());
   };
 };
+
 export const startGoogleSingIn = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
@@ -17,6 +18,7 @@ export const startGoogleSingIn = () => {
     dispatch(login(result));
   };
 };
+
 export const startCreatingUserWithEmailPassword = ({
   email,
   password,
@@ -24,13 +26,13 @@ export const startCreatingUserWithEmailPassword = ({
 }) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
-    const result = await registerUserWithEmailAndPassword({
-      email,
-      password,
-      displayName,
-    });
-    console.log(result);
-    //if (!result.ok) return dispatch(logout(result.errorMsg));
-    //dispatch(login(result));
+    const { ok, uid, photoURL, errorMsg } =
+      await registerUserWithEmailAndPassword({
+        email,
+        password,
+        displayName,
+      });
+    if (!ok) return dispatch(logout({ errorMsg }));
+    dispatch(login({ uid, photoURL, email, displayName }));
   };
 };
