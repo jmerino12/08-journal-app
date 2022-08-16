@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -20,6 +21,7 @@ const formValidation = {
 };
 
 export const RegisterPage = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const {
     formState,
     displayName,
@@ -31,10 +33,14 @@ export const RegisterPage = () => {
     emailValid,
     passwordValid,
   } = useForm(formData, formValidation);
-  console.log(displayNameValid);
-  const onSubmit = (event) => {};
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+  };
   return (
     <AuthLayout title="Crear Cuenta">
+      {/*<h1>FormValid: {isFormValid ? "Válido" : "Invalido"}</h1>*/}
       <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -46,6 +52,8 @@ export const RegisterPage = () => {
               fullWidth
               value={displayName}
               onChange={onInputChange}
+              error={!!displayNameValid && formSubmitted}
+              helperText={displayNameValid}
             />
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -57,6 +65,8 @@ export const RegisterPage = () => {
               fullWidth
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
             />
           </Grid>
 
@@ -69,6 +79,8 @@ export const RegisterPage = () => {
               fullWidth
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
             />
           </Grid>
 
