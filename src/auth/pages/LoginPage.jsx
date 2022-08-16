@@ -2,13 +2,23 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { Google } from "@mui/icons-material";
-import { Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/";
-import { checkingAuthenticaction, startGoogleSingIn } from "../../store/auth";
+import {
+  startGoogleSingIn,
+  startLoginWithEmailPassword,
+} from "../../store/auth";
 
 export const LoginPage = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status, errorMsg } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
     email: "jmerino1204@gmail.com",
@@ -19,12 +29,10 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({ email, password });
-    dispatch(checkingAuthenticaction(email, password));
+    dispatch(startLoginWithEmailPassword(email, password));
   };
 
   const onGoogleSingIn = () => {
-    console.log("onGoogleSingIn");
     dispatch(startGoogleSingIn());
   };
 
@@ -79,7 +87,9 @@ export const LoginPage = () => {
               </Button>
             </Grid>
           </Grid>
-
+          <Grid item xs={12} display={!!errorMsg ? "" : "none"}>
+            <Alert severity="error">{errorMsg}</Alert>
+          </Grid>
           <Grid container direction="row" justifyContent="end">
             <Link component={RouterLink} color="inherit" to="/auth/register">
               Crear una cuenta
