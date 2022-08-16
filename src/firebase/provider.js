@@ -1,8 +1,10 @@
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import { FirebaseAuth } from "./config";
@@ -79,6 +81,20 @@ export const loginWithEmailAndPassword = async (email, password) => {
       photoURL,
       displayName,
     };
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return {
+      ok: false,
+      errorCode,
+      errorMsg: errorMessage,
+    };
+  }
+};
+
+export const logoutFirebase = async () => {
+  try {
+    await signOut(getAuth());
   } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
