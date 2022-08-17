@@ -37,7 +37,6 @@ export const startLoadingNotes = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
     if (!uid) throw new Error("El uid del usuario no existe");
-    console.log({ uid });
     const result = await loadNotes(uid);
     dispatch(setNotes(result));
   };
@@ -61,7 +60,6 @@ export const startSaveNote = () => {
 export const startUploadingFiles = (files = []) => {
   return async (dispatch) => {
     dispatch(setSaving());
-    // await fileUpload(files[0]);
     const fileUploadPromises = [];
     for (const file of files) {
       fileUploadPromises.push(fileUpload(file));
