@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const jorunalSlice = createSlice({
   name: "jorunal",
   initialState: {
-    isSaving: true,
+    isSaving: false,
     messageSaved: "",
     notes: [],
     active: null,
@@ -17,10 +17,17 @@ export const jorunalSlice = createSlice({
     },*/
   },
   reducers: {
-    addNewEmptyNote: (state, action) => {
-      state.counter += 1;
+    savingNewNote: (state, action) => {
+      state.isSaving = true;
     },
-    setActiveNote: (state, action) => {},
+
+    addNewEmptyNote: (state, action) => {
+      state.notes.push(action.payload);
+      state.isSaving = false;
+    },
+    setActiveNote: (state, action) => {
+      state.active = action.payload;
+    },
     setNotes: (state, action) => {},
     setSaving: (state) => {},
     updateNote: (state) => {},
@@ -29,6 +36,7 @@ export const jorunalSlice = createSlice({
 });
 
 export const {
+  savingNewNote,
   addNewEmptyNote,
   setActiveNote,
   setNotes,
