@@ -46,6 +46,10 @@ export const jorunalSlice = createSlice({
       });
       state.messageSaved = `${payload.title}, actualizada correctamente`;
     },
+    setPhotosToActiveNote: (state, action) => {
+      state.active.imagesUrls = [...state.active.imagesUrls, ...action.payload];
+      state.isSaving = false;
+    },
     deleteNoteById: (state) => {},
   },
 });
@@ -57,5 +61,6 @@ export const {
   setNotes,
   setSaving,
   updateNote,
+  setPhotosToActiveNote,
   deleteNoteById,
 } = jorunalSlice.actions;
