@@ -56,7 +56,10 @@ export const jorunalSlice = createSlice({
       state.notes = [];
       state.active = null;
     },
-    deleteNoteById: (state) => {},
+    deleteNoteById: (state, { payload }) => {
+      state.active = null;
+      state.notes = state.notes.filter((note) => note.id !== payload);
+    },
   },
 });
 
