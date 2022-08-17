@@ -27,12 +27,14 @@ export const jorunalSlice = createSlice({
     },
     setActiveNote: (state, action) => {
       state.active = action.payload;
+      state.messageSaved = "";
     },
     setNotes: (state, { payload }) => {
       state.notes = payload;
     },
     setSaving: (state) => {
       state.isSaving = true;
+      state.messageSaved = "";
     },
     updateNote: (state, { payload }) => {
       state.isSaving = false;
@@ -42,6 +44,7 @@ export const jorunalSlice = createSlice({
         }
         return note;
       });
+      state.messageSaved = `${payload.title}, actualizada correctamente`;
     },
     deleteNoteById: (state) => {},
   },
