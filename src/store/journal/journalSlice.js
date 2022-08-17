@@ -50,6 +50,12 @@ export const jorunalSlice = createSlice({
       state.active.imagesUrls = [...state.active.imagesUrls, ...action.payload];
       state.isSaving = false;
     },
+    clearNotesLogout: (state) => {
+      state.isSaving = false;
+      state.messageSaved = "";
+      state.notes = [];
+      state.active = null;
+    },
     deleteNoteById: (state) => {},
   },
 });
@@ -63,4 +69,5 @@ export const {
   updateNote,
   setPhotosToActiveNote,
   deleteNoteById,
+  clearNotesLogout,
 } = jorunalSlice.actions;
