@@ -24,10 +24,7 @@ const formValidation = {
 
 export const RegisterPage = () => {
   const { status, errorMsg } = useSelector((state) => state.auth);
-  const isCheckingAuthentication = useMemo(
-    () => status === "checking",
-    [status]
-  );
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const {
