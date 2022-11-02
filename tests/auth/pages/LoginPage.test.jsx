@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { fireEvent, getByLabelText, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from 'react-redux'
 import { MemoryRouter } from "react-router-dom";
 import { LoginPage } from "../../../src/auth/pages/LoginPage";
 import { authSlice } from "../../../src/store/auth";
+import { startGoogleSingIn } from "../../../src/store/auth/authSlice";
 import { noAuthenticatedState } from "../../fixtures/authFixtures";
 
 const store  = configureStore({
@@ -14,6 +15,10 @@ const store  = configureStore({
         auth: noAuthenticatedState
     }
 })
+const mockStartGoogleSingIn = jest.fn();
+jest.mock('../../../src/store/auth/thunks', () => ({
+    startGoogleSingIn: () => mockStartGoogleSingIn
+}))
 
 describe('Pruebas en LoginPage', () => { 
     test('Debe de mostrar el componente correctamente', () => { 
@@ -39,6 +44,7 @@ describe('Pruebas en LoginPage', () => {
 
         const googleBtn = screen.getByLabelText('google-btn');
         fireEvent.click(googleBtn);
+        expect(mockStartGoogleSingIn).toHaveBeenCalled()
         
 
       })
