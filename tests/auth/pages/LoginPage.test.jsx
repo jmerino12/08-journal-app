@@ -44,7 +44,7 @@ describe('Pruebas en LoginPage', () => {
 
         const googleBtn = screen.getByLabelText('google-btn');
         fireEvent.click(googleBtn);
-        expect(mockStartGoogleSingIn).toHaveBeenCalled()
+        expect(mockStartGoogleSingIn).toHaveBeenCalled();
         
 
       })
