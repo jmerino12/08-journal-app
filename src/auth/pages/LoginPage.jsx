@@ -35,6 +35,7 @@ export const LoginPage = () => {
   };
 
   const onGoogleSingIn = () => {
+    console.log("onclick")
     dispatch(startGoogleSingIn());
   };
 
@@ -84,6 +85,7 @@ export const LoginPage = () => {
               <Button
                 variant="contained"
                 fullWidth
+                aria-label="google-btn"
                 onClick={onGoogleSingIn}
                 disabled={isAuthenticating}
               >
