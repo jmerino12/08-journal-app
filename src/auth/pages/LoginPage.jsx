@@ -18,8 +18,8 @@ import {
 } from "../../store/auth";
 
 const formData = {
-  email: "jmb@hotmail.com",
-  password: "123456",
+  email: "",
+  password: "",
 };
 
 export const LoginPage = () => {
